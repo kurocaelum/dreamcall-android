@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "22589604814",
+    "firebase_url": "https://dreamcall-c0893.firebaseio.com",
+    "project_id": "dreamcall-c0893",
+    "storage_bucket": "dreamcall-c0893.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22589604814:android:cbb95125b80bdcb12d219f",
+        "android_client_info": {
+          "package_name": "android.imd.dreamcall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22589604814-hvr2ur2q2lb8r9odqmlbc2849rip8rr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAveuPJK6Pl7yefcuu54UuGGnQvousK50o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22589604814-hvr2ur2q2lb8r9odqmlbc2849rip8rr5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
