@@ -7,49 +7,47 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
-    tools:context=".LoginActivity">
+    tools:context=".DiarioSonoActivity">
 
     <TextView
         android:id="@+id/logoLogin"
-        android:text="DreamCall"
-        android:textSize="30sp"
+        android:text="Diário de Sono"
+        android:textSize="40sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         />
 
-    <EditText
-        android:id="@+id/edtEmailLogin"
-        android:layout_width="300dp"
+<!-- TODO disabled caso já tenha preenchido ou tiver passado da hora -->
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        />
-
-    <EditText
-        android:id="@+id/edtSenhaLogin"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        />
+        android:text="Hora em que deitou"
+        android:textSize="20sp"/>
 
     <Button
-        android:id="@+id/btnEntrarLogin"
-        android:layout_width="300dp"
+        android:id="@+id/btn_bedtime"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:onClick="entrar"
+        android:textSize="20sp"
+        android:text="--:--"
+        android:layout_margin="10dp"
         style="@style/Widget.AppCompat.Button.Colored"
         />
 
-    <Button
-        android:id="@+id/btnCadastrarLogin"
-        android:layout_width="300dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cadastrar"
-        android:onClick="cadastrar"
+        android:textSize="20sp"
+        android:text="Hora em que levantou" />
+
+    <Button
+        android:id="@+id/btn_waketime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="--:--"
+        android:layout_margin="10dp"
         style="@style/Widget.AppCompat.Button.Colored"
         />
 
