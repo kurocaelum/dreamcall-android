@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class DiarioSonoActivity : AppCompatActivity() {
@@ -37,7 +38,7 @@ class DiarioSonoActivity : AppCompatActivity() {
 
     fun disableButton(button: Button){
         button.isClickable = false
-        button.setBackgroundColor(Color.GRAY)
+        ViewCompat.setBackgroundTintList(button, ContextCompat.getColorStateList(this, android.R.color.darker_gray))
     }
 
 }
