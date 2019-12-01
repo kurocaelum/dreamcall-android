@@ -40,19 +40,19 @@ class DiarioSonoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_diario_sono)
 
-        txt_date = findViewById(R.id.txt_date)
         txt_state = findViewById(R.id.txt_state)
+        txt_date = findViewById(R.id.txt_date)
 
         btn_bedtime = findViewById(R.id.btn_bedtime)
         btn_waketime = findViewById(R.id.btn_waketime)
         btn_preencher = findViewById(R.id.btn_preencher)
 
         if(state == null){
-            state = State.Noite
-
             val cal = Calendar.getInstance()
             date = SimpleDateFormat("dd/MM").format(cal.time)
             txt_date.setText(date)
+
+            state = State.Noite
         }
 
         updateState()
@@ -84,6 +84,8 @@ class DiarioSonoActivity : AppCompatActivity() {
             } else if(state == State.Dia && btn_waketime.text != "--:--"){
                 this.state = State.Registro
                 updateState()
+            } else {
+                Toast.makeText(this, "Horário não preenchido", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -94,6 +96,7 @@ class DiarioSonoActivity : AppCompatActivity() {
 
         if(state == State.Noite){
             disableButton(btn_waketime)
+            enableButton(btn_bedtime)
         } else if(state == State.Dia){
             disableButton(btn_bedtime)
             enableButton(btn_waketime)
@@ -105,12 +108,12 @@ class DiarioSonoActivity : AppCompatActivity() {
     }
 
     fun disableButton(button: Button){
-        button.isClickable = false
+        button.isEnabled = false
         ViewCompat.setBackgroundTintList(button, ContextCompat.getColorStateList(this, android.R.color.darker_gray))
     }
 
     fun enableButton(button: Button){
-        button.isClickable = true
+        button.isEnabled = true
         ViewCompat.setBackgroundTintList(button, ContextCompat.getColorStateList(this, R.color.colorAccent))
     }
 
