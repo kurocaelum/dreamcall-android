@@ -38,6 +38,7 @@
         android:id="@+id/btnCadastrarCadastro"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Cadastrar"
         style="@style/Widget.AppCompat.Button.Colored"
         />
