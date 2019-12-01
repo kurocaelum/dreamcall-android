@@ -96,7 +96,6 @@ class DiarioSonoActivity : AppCompatActivity() {
 
         if(state == State.Noite){
             disableButton(btn_waketime)
-            enableButton(btn_bedtime)
         } else if(state == State.Dia){
             disableButton(btn_bedtime)
             enableButton(btn_waketime)
