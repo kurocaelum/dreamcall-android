@@ -1,6 +1,7 @@
 package android.imd.dreamcall
 
 import android.app.TimePickerDialog
+import android.imd.dreamcall.Model.DiarioSono
 import android.imd.dreamcall.Model.DiarioState
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -23,8 +24,9 @@ import java.util.*
 /* TODO update: Incluir bedtime e waketime em formato de data, para que seja possível calcular diferença de horas */
 class DiarioSonoActivity : AppCompatActivity() {
 
-    private var state: DiarioState = DiarioState.Noite
+    private var state: String = DiarioState.Noite.toString()
     private lateinit var date: String
+    private lateinit var id: String
 
     private lateinit var btn_bedtime: Button
     private lateinit var btn_waketime: Button
@@ -81,20 +83,14 @@ class DiarioSonoActivity : AppCompatActivity() {
         }
 
         btn_salvar.setOnClickListener {
-            if(state == DiarioState.Noite && btn_bedtime.text != "--:--"){
-                this.state = DiarioState.Dia
+            if(state == DiarioState.Noite.toString() && btn_bedtime.text != "--:--"){
+                this.state = DiarioState.Dia.toString()
+//                salvarDiario() // TODO
                 updateState()
-
-                /*var intent = Intent(applicationContext, ListActivity::class.java)
-                startActivity(intent)
-                finish()*/
-            } else if(state == DiarioState.Dia && btn_waketime.text != "--:--"){
-                this.state = DiarioState.Registro
+            } else if(state == DiarioState.Dia.toString() && btn_waketime.text != "--:--"){
+                this.state = DiarioState.Registro.toString()
+//                salvarDiario()
                 updateState()
-
-                /*var intent = Intent(applicationContext, ListActivity::class.java)
-                startActivity(intent)
-                finish()*/
             } else {
                 Toast.makeText(this, "Horário não preenchido", Toast.LENGTH_SHORT).show()
             }
@@ -104,14 +100,14 @@ class DiarioSonoActivity : AppCompatActivity() {
     /* Habilita/desabilita botões de acordo com estado de registro da noite */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun updateState(){
-        txt_state.text = state.toString()
+        txt_state.text = state
 
-        if(state == DiarioState.Noite){
+        if(state == DiarioState.Noite.toString()){
             disableButton(btn_waketime)
-        } else if(state == DiarioState.Dia){
+        } else if(state == DiarioState.Dia.toString()){
             disableButton(btn_bedtime)
             enableButton(btn_waketime)
-        } else if(state == DiarioState.Registro){
+        } else if(state == DiarioState.Registro.toString()){
             disableButton(btn_bedtime)
             disableButton(btn_waketime)
             disableButton(btn_salvar)
@@ -135,8 +131,62 @@ class DiarioSonoActivity : AppCompatActivity() {
         txtSleeptime.isVisible = true
 
         var sleeptime = ChronoUnit.HOURS.between(bedtime.toInstant(), waketime.toInstant())
+        if(sleeptime < 0)
+            sleeptime += 23
 
         txtSleeptime.text = "$sleeptime horas de sono"
+    }
+
+    // TODO
+    fun salvarDiario(){
+
+        if(state == DiarioState.Noite.toString()){
+            var bedtimeStr = SimpleDateFormat("HH:mm").format(bedtime.time).toString()
+
+            var diario = hashMapOf(
+                "date" to date,
+                "state" to state,
+                "bedtime" to bedtimeStr,
+                "waketime" to "--:--"
+            )
+
+            ListActivity.dbDiarios.add(diario)
+                .addOnSuccessListener { docref ->
+                    id = docref.id
+
+                    Toast.makeText(this,
+                        "Adicionado com Sucesso", Toast.LENGTH_LONG)
+                        .show()
+                }
+                .addOnFailureListener{
+                        e ->
+                    Toast.makeText(this,
+                        "Erro ao adicionar: $e", Toast.LENGTH_LONG)
+                        .show()
+                }
+        } else {
+            var waketimeStr = SimpleDateFormat("HH:mm").format(waketime.time).toString()
+
+            var diario = mapOf(
+                "waketime" to waketimeStr
+            )
+
+            ListActivity.dbDiarios.document(id).update(diario)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        this,
+                        "Editado com sucesso",
+                        Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener {e ->
+                    Toast.makeText(
+                        this,
+                        "Erro ao Editar: $e",
+                        Toast.LENGTH_LONG).show()
+                }
+        }
+
+
     }
 
 }
