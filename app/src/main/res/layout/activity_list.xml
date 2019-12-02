@@ -9,9 +9,9 @@
     android:gravity="center"
     tools:context=".ListActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ListActivity"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_diarios"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

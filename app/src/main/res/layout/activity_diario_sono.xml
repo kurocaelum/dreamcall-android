@@ -66,15 +66,22 @@
         style="@style/Widget.AppCompat.Button.Colored"
         />
 
-    <Button
-        android:id="@+id/btn_preencher"
+    <TextView
+        android:id="@+id/txt_sleeptime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Preencher"
+        android:visibility="invisible"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="Sleep Time" />
+
+    <Button
+        android:id="@+id/btn_salvar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
         android:layout_marginTop="30dp"
         style="@style/Widget.AppCompat.Button.Colored"
         />
-
-
 
 </LinearLayout>

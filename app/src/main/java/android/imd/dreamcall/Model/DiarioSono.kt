@@ -1,5 +1,15 @@
 package android.imd.dreamcall.Model
 
-import android.imd.dreamcall.DiarioSonoActivity
+import java.util.Calendar
 
-data class DiarioSono(val date: String, var state: DiarioSonoActivity.State)
+enum class DiarioState{
+    Noite,
+    Dia,
+    Registro;
+
+    override fun toString(): String {
+        return super.toString()
+    }
+}
+
+data class DiarioSono(val date: String, var state: DiarioState, var bedtime: Calendar, var waketime: Calendar)
